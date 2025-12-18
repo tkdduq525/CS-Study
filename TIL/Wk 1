@@ -6,7 +6,7 @@
 -Content : Input, 즉 컴퓨터에 '입력'하는 방법에 대해
            우리는 숫자를 10진법으로, 컴퓨터는 2진법으로 나타낸다. 우리가 사용하는 문자를 컴퓨터는 ASCII(아스키코드)를 사용해서 나타낸다.(A = 10진법 기준 65 = 2진법 기준 1000001)
            Unicode(유니코드)로는 더 많은 바이트를 사용해서 이모지를 포함한 다양한 문자들을 나타낼 수 있다.(기쁨의 눈물 = 10진법 기준 128,514) 그림, 영상, 음악 또한 이처럼 다양한 코드를 사용해서 숫자로 나타낼 수 있다.
-           CS50을 ASCII를 통해 나타내보았다. CS50 = 01000011 / 01010011 / 00110101 / 00110000
+           CS50을 ASCII를 통해 나타내보았다. (ex CS50 = 01000011 / 01010011 / 00110101 / 00110000)
 
 ## 25.12.18(Thu)-Day 2
 -Lecture : 1. Computational Thinking, Scratch
@@ -28,3 +28,18 @@
            Else
               Quit
            이 의사코드는 함수, 조건, 불리언, 루프로 구성되어 있다.
+           (ex 1부터 100까지 숫자 중 1가지 숫자를 맞추는 스무고개 게임의 알고리즘)
+           1. Set min to 1
+           2. Set max to 100
+           3. Calculate middle as (min + max) / 2
+           4. If middle has .5, round it down to the nearest whole number
+           5. Ask "Is the number [middle]?"
+           6. If answer is "Yes"
+               7. Stop (Success!)
+           8. Else if answer is "The number is Smaller"
+               9. Set max to middle - 1
+               10. Go back to line 3
+           11. Else if answer is "The number is Larger"
+               12. Set min to middle + 1
+               13. Go back to line 3
+              

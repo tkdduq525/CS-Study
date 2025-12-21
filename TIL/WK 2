@@ -1,1 +1,32 @@
+# Today I leared
 
+## 25.12.22(Mon)-Day 5
+-Lecture : 1. C language
+           3) If statement and loop, 4) Data type, Format specifier and Operator
+-Content : Int, 변수의 종류 중 숫자에 대해
+           int i = 0;처럼 변수의 종류 및 이름을 지정해준 후 변수의 값을 1씩 증가시키는 것을 진행을 하려고 한다. 참고로 여기에서 사용된 =는 할당 연산자이다(Wk1 내용)
+           i = i + 1;은 int i += 1; i++; 등 보다 간단한 코드로 나타낼 수 있다.
+
+           if, 조건문에 대해
+           if (x == y)
+           {
+               printf("x is equal to y\n");
+           }
+           처럼 if 뒤에는 ()안에 조건이 들어가고 {}안에 수행할 작업이 들어간다. =은 우측의 것을 좌측의 것에 할당한다는 할당 연산자를 의미하므로 ==이라는 일치연산자로 같다는 것을 표현한다.
+           else if, else는 스크래치에서 했던 것과 동일하다. 추가로 if같은 조건과 같은 것들 뒤에는 ;가 붙지 않는다.
+
+           while, for 루프에 대해
+           while (true)
+           {
+               printf("hello, world\n");
+           }
+           처럼 while 뒤에는 ()안에 조건이 들어가고 {}안에 수행할 작업이 들어간다. 
+           특정한 횟수만큼 반복하는 작업을 수행할 때 while 윗줄에 int i = 0;을 작성하고 조건을 i<50으로 하고 printf 아랫줄에 i++를 작성해도 되지만 for을 통해 나타낼 수도 있다.
+           for (int i = 0; i < 50; i++)
+           {
+               printf("hello, world\n");
+           }
+           처럼 for 루프로 나타낼 수 있다. for 뒤에는 ()안에 변수; 조건; 변수 증가를 작성하고 {}안에 수행할 작업이 들어간다. 주의해야할 점은 ()안에 ,가 아닌 ;이라는 것이다.
+           (ex "개발공부는 재미있다!"를 10번 출력하는 코드를 작성)
+           
+           

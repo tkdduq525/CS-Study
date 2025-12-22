@@ -98,10 +98,68 @@
 ## 25.12.23(Tue)-Day 6
 -Lecture : 1. C language
            3) Custom Functions, Nested Loops 4) Limits of Hardware
--Content : 
+-Content : 사용자 지정 함수에 대해
+           int main(void), void cough(void) 등 함수의 왼쪽에는 출력의 종류, 함수의 오른쪽에는 입력의 종류를 작성한다.
+           
+           #include <stdio.h>
+           void cough(int n);
+           int main(void)
+           {
+               cough(3);
+           }
+           void cough(int n)
+           {
+               for (int i = 0; i < n; i++)
+               {
+                   printf("cough\n");
+               }
+           }
+           위의 예시는 입력값 n을 받아 "cough"를 n번 출력하는 결과를 가지는 함수인 cough함수를 정의하고 main 함수에서 cough(3)를 실행하는 코드이다.
 
-
-
+           #include <cs50.h>
+           #include <stdio.h>
+           int get_positive_int(void);
+           int main(void)
+           {
+               int i = get_positive_int();
+               printf("%i\n", i);
+           }
+           int get_positive_int(void)
+           {
+               int n;
+               do
+               {
+                   n = get_int("Positive Integer: ");
+               }
+               while (n < 1);
+               return n;
+           }
+           위의 예시는 do-while 루프를 이용해서 Positive Integer을 물어보고 이를 n에 저장한 후 n < 1인 경우에는 이를 반복하고 아니라면 n을 출력하는 get_positive_int 함수를 정의한다.
+           이후 main 함수에서 get_positive_int 함수를 실행해서 출력된 값을 i로 할당한 후 형식지정자를 이용해 i를 출력한다. 
+           int n에는 별다른 설명이 없는데 이 때 n을 Garbage value라고 한다.
+           여기서 do { int n= ~ } 이런식으로 작성하지 않은 이유는 전자처럼 작성했을 시에 int라고 선언된 변수는 do {} 에서만 사용이 가능하고 {}밖으로 나오면 변수가 소멸되기 때문이다.
+           
+           중첩루프에 대해
+           #include <cs50.h>
+           #include <stdio.h>
+           int main(void)
+           {
+               int n;
+               do
+               {
+                   n = get_int("Size: ");
+               }
+               while (n < 1);
+               for (int i = 0; i < n; i++)
+               {
+                   for (int j = 0; j < n; j++)
+                   {
+                       printf("#");
+                   }
+                   printf("\n");
+               }
+           }
+           위의 예시는 사용자에게 Size를 물어보고 이를 n이라고 할당한 후 '# 출력을 n번 반복한 후 줄을 바꾸는 과정'을 n번 반복한다. 그렇게 해서 가로, 세로가 모두 n개인 #을 출력한다.
 
 
 

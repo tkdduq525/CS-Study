@@ -45,53 +45,6 @@
 
            디렉토리 이동 및 변경 등을 텍스트 기반의 Terminal에서 하는 방법
            ls(list: 현재 있는 파일들의 목록)로 현재 있는 파일들의 목록을 살피는데 *의 유무에 따라 소스코드와 머신코드를 구분할 수 있다.(Wk1 내용)
-           이때 /가 붙어있는 것은 폴ㄷ Today I leared
-
-## 25.12.22(Mon)-Day 5
--Lecture : 1. C language
-           3) If statement and loop, 4) Data type, Format specifier and Operator
--Content : Int, 변수의 종류 중 숫자에 대해
-           int i = 0;처럼 변수의 종류 및 이름을 지정해준 후 변수의 값을 1씩 증가시키는 것을 진행을 하려고 한다. 참고로 여기에서 사용된 =는 할당 연산자이다(Wk1 내용)
-           i = i + 1;은 int i += 1; i++; 등 보다 간단한 코드로 나타낼 수 있다.
-
-           if, 조건문에 대해
-           if (x == y)
-           {
-              printf("x is equal to y\n");
-           }
-           처럼 if 뒤에는 ()안에 조건이 들어가고 {}안에 수행할 작업이 들어간다. =은 우측의 것을 좌측의 것에 할당한다는 할당 연산자를 의미하므로 ==이라는 일치연산자로 같다는 것을 표현한다.
-           else if, else는 스크래치에서 했던 것과 동일하다. 추가로 if같은 조건과 같은 것들 뒤에는 ;가 붙지 않는다.
-
-           while, for 루프에 대해
-           while (true)
-           {
-              printf("hello, world\n");
-           }
-           처럼 while 뒤에는 ()안에 조건이 들어가고 {}안에 수행할 작업이 들어간다. 
-           특정한 횟수만큼 반복하는 작업을 수행할 때 while 윗줄에 int i = 0;을 작성하고 조건을 i<50으로 하고 printf 아랫줄에 i++를 작성해도 되지만 for을 통해 나타낼 수도 있다.
-           for (int i = 0; i < 50; i++)
-           {
-              printf("hello, world\n");
-           }
-           처럼 for 루프로 나타낼 수 있다. for 뒤에는 ()안에 변수; 조건; 변수 증가를 작성하고 {}안에 수행할 작업이 들어간다. 주의해야할 점은 ()안에 ,가 아닌 ;이라는 것이다.
-
-           (ex "개발공부는 재미있다!"를 10번 출력하는 코드를 작성)
-           #include <cs50.h>
-           #include <stdio.h>
-           int main(void)
-           {
-              for (int i = 0; i < 10; i++)
-              {
-                 printf("Cs study is funny!\n");
-              }
-           }
-           
-           Data type, Format Specifier, Operator, 자료형, 형식 지정자 그리고 연산자에 대해
-           bool(ex True, False, yes, no), char(ex a, Z, ?), string, int, float(ex 3.5, 0.0)
-           %s(string), %f(float) %i(int), %c(char), //(주석), %(나머지), &&(그리고), ||(또는)
-
-           디렉토리 이동 및 변경 등을 텍스트 기반의 Terminal에서 하는 방법
-           ls(list: 현재 있는 파일들의 목록)로 현재 있는 파일들의 목록을 살피는데 *의 유무에 따라 소스코드와 머신코드를 구분할 수 있다.(Wk1 내용)
            이때 /가 붙어있는 것은 디렉토리이고 그 디렉토리로 변경을 하기 위해서는 cd (파일이름)을 입력해야한다. cd만 입력하면 기본 설정 디렉토리로 돌아가게 된다.
            pwd를 입력하면 현재 내가 있는 디렉토리를 알 수 있다.
            

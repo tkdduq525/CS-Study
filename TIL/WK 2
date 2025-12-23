@@ -1,7 +1,7 @@
 # Today I leared
 
 ## 25.12.22(Mon)-Day 5
--Lecture : 1. C language
+-Lecture : 2. C language
            3) If statement and loop, 4) Data type, Format specifier and Operator
 -Content : Int, 변수의 종류 중 숫자에 대해
            int i = 0;처럼 변수의 종류 및 이름을 지정해준 후 변수의 값을 1씩 증가시키는 것을 진행을 하려고 한다. 참고로 여기에서 사용된 =는 할당 연산자이다(Wk1 내용)
@@ -49,8 +49,8 @@
            pwd를 입력하면 현재 내가 있는 디렉토리를 알 수 있다.
            
 ## 25.12.23(Tue)-Day 6
--Lecture : 1. C language
-           3) Custom Functions, Nested Loops 4) Limits of Hardware
+-Lecture : 2. C language
+           5) Custom Functions, Nested Loops 6) Limits of Hardware
 -Content : 사용자 지정 함수에 대해
            int main(void), void cough(void) 등 함수의 왼쪽에는 출력의 종류, 함수의 오른쪽에는 입력의 종류를 작성한다.
            
@@ -114,8 +114,11 @@
            }
            위의 예시는 사용자에게 Size를 물어보고 이를 n이라고 할당한 후 '# 출력을 n번 반복한 후 줄을 바꾸는 과정'을 n번 반복한다. 그렇게 해서 가로, 세로가 모두 n개인 #을 출력한다.
 
+           RAM이 유한한 크기의 비트만 저장할 수 있기 때문에 부동 소수점 부정확성, 정수 오버플로우가 발생할 수 있다. 
 
-
-
+## 25.12.24(Wed)-Day 7
+-Lecture : 3. Array
+           1) Compiling, 2) Debugging
+-Content : 
 
 

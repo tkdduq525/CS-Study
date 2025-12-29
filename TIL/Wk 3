@@ -3,4 +3,81 @@
 ## 25.12.29(Mon)-Day 12
 -Lecture : 3. Arrays
            7) Use of strings, 8) Command line argument
--Content : 
+-Content : 문자열에 대해
+           사용자에게 문자열을 입력받아 한글자씩 출력하는 프로그램을 작성해보면 다음과 같다.
+           #include <cs50.h>
+           #include <stdio.h>
+           #include <string.h>
+           int main(void)
+           {
+               string s = get_string("Input: ");
+               printf("Output:\n");
+               for (int i = 0, n = strlen(s); i < n; i++)
+               {
+                   printf("%c\n", s[i]);
+               }
+           }
+           여기서 strlen(문자열 이름)이 사용되는데 이는 문자열의 길이를 나타내는 함수이다. for 루프를 위와 같이 짜도 되고 int i = 0; s[i] != '\0'; i++ 로 짜도 된다.
+           문자열을 입력받아 uppercase, 대문자로 바꿔주는 코드를 작성해보면 다음과 같다.
+           #include <cs50.h>
+           #include <stdio.h>
+           #include <string.h>
+           int main(void)
+           {
+               string s = get_string("Before: ");
+               printf("After:  ");
+               for (int i = 0, n = strlen(s); i < n; i++)
+               {
+                   if (s[i] >= 'a' && s[i] <= 'z')
+                   {
+                       printf("%c", s[i] - 32);
+                   }
+                   else
+                   {
+                       printf("%c", s[i]);
+                   }
+               }
+               printf("\n");
+           }
+           여기서 헷갈릴만한 첫 번째 포인트는 6) Strings and arrays에서 배웠던 것처럼 char이 1바이트짜리 정수이기 때문에 사칙연산이 가능하고 명시적으로 형변환을 해주지 않아도 된다는 점이다.
+           주의해야할 점은 printf를 할 때이다. %d를 하면 숫자로 출력이되고 %c를 하면 문자로 출력이 된다.
+           두 번째 포인트는 '', 작은따옴표이다. 코드 내에서 a, 'a', "a"는 모두 다르다. a는 보통 할당된 변수 이름, 'a'는 문자 상수(글자가 아닌 아스키코드에 적힌 숫자), "a"는 뒤에 \0이 붙은 문자열이다.
+           위의 코드는 ctype 라이브러리에 있는 toupper() 함수를 쓰면 더 간단하게 작성할 수 있다. 라이브러리를 추가한 후 if else 문을 없애고 printf("%c", toupper(s[i]));를 사용하면 된다.
+
+           명령행인자에 대해(1)
+           #include <cs50.h>
+           #include <stdio.h>
+           int main(int argc, string argv[])
+           {
+               if (argc == 2)
+               {
+                   printf("hello, %s\n", argv[1]);
+               }
+               else
+               {
+                   printf("hello, world\n");
+               }
+           }
+           우리는 int main(void) 대신에 위와 같이 코드를 작성할 수 있다. 여기서 argc는 함수가 받게 될 입력의 개수이다. 
+           우리가 terminal에서 어떤 파일을 실행할 때 ./(파일이름)을 입력하곤 하는데 이 경우에 argc는 1이고 argv[0]은 ./(파일이름)이다. 뒤에 David같은 다른 문자열을 입력할 수도 있는데 이 경우 그 문자열이 argv[1]이 된다.
+
+           명령행인자에 대해(2)
+           명령행인자는 다른게 아니라 실행할 때 정해주는 초기 설정값이다. 기존에는 get_string이나 scanf를 통해 실행 후에 값을 입력받았었다. 하지만 명령행인자의 경우 실행과 동시에 값을 제공한다. 
+           소스코드에 int main(int argc, string argv[])라고 작성을 하고 컴파일할 때 -o를 쓰는 경우를 살펴보자. 
+           참고로 -o는 컴파일할 때의 명령행인자이고 오늘 배운 것(./(파일이름), David)은 실행할 때의 명령행인자이다.
+           clang -o hello hello.c라고 입력할 경우 -o가 argv[1], hello가 argv[2]일 것이고 clang의 내부코드에는 argv[1]가 -o라면 파일명을 argv[2]로 한다는 코드가 작성되어있을 것이다.
+           그렇게 컴파일하고 난 뒤 실행할 때 ./hello David라고 입력하면 프로그램이 David를 인식해서 argv[1]에 저장한다. 참고로 int main(void)를 쓴 코드 내부에서도 argv[0]은 여전히 파일이름이지만 사용이 불가능하다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

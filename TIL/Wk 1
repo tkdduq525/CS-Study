@@ -84,7 +84,7 @@
               string answer = get_string("What's your name?\n");
               printf("Hello, %s\n", answer);
            }
-           이후 이 파일을 컴파일 하기 위해서는 Terminal에 $clang -o clang clang.c -lcs50 혹은 $make string을 입력해서 머신코드 파일을 생성하고 $./string을 입력해서 실행한다.
+           이후 이 파일을 컴파일 하기 위해서는 Terminal에 $clang -o clang clang.c -lcs50(?) 혹은 $make string을 입력해서 머신코드 파일을 생성하고 $./string을 입력해서 실행한다.
 
            (ex "좋아하는 동물을 알려주세요"로 질문하여 동물 이름을 animal이라는 변수에 저장하고, 이를 "내가 좋아하는 동물은"으로 출력해주는 코드)
            #include <cs50.h>

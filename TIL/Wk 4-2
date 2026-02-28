@@ -2,7 +2,128 @@
 
 ## 25.02.27(Fri)-Day 18
 -Lecture : 5. Memory
-           7) , 8) , 9) 
+           7) Memory swap, stack, heap, 8) File writing, 9) File reading
+-Content : 메모리 교환에 대해
+           #include <stdio.h>
+           int main(void)
+           {
+              int x = 1;
+              int y = 2;
+              printf("x is %i, y is %i\n", x, y);
+              swap(x, y);
+              printf("x is %i, y is %i\n", x, y);
+           }
+           void swap(int a, int b)
+           {
+              int tmp = a;
+              a = b;
+              b = tmp;
+           }
+           위 코드를 실행하면 우리가 생각한 것처럼 처음에 x is 1, y is 2 이후 x is 2, y is 1이 나오지 않고 x is 1, y is 2가 한번 더 나오게 된다.
+           그 이유는 출력은 x, y를 하지만 swap의 대상은 x, y의 복사본인 a, b이기 때문이다. 
+           위 코드에서 x, y, tmp, a, b 모두 스택영역에 저장되지만 그 안에서도 서로 다른 위치에 저장되기 때문에 a, b를 바꾸는 것이 x, y에 영향을 끼치지 않는것이다. 
+           우리가 원하는 결과를 얻기 위해서 코드를 수정하려면 swap 함수에서 int a, int b가 아닌 int *a, int *b로 설정하고(정수의 주소를 입력받아 a로 지정)
+           main 함수 내에서 x와 y가 아닌 &x와 &y로 설정하여 주소를 교환하면 된다.(포인터인 a와 b가 x와 y의 주소를 저장했고 swap 함수 내의 변수들 앞에는 *가 붙어있기 때문에 해당 주소의 '값'을 다룬다)
+
+           스택, 힙에 대해
+           메모리 안에는 데이터를 저장하는 구역이 지정되어있는데 가장 위가 머신 코드 영역, 그 아래가 글로벌 영역, 그 아래 힙 영역이 위에서 아래로 저장되고 제일 밑인 스택 영역이 아래에서 위로 저장된다.
+           머신 코드 영역에는 우리 프로그램이 실행될 때 그 프로그램이 컴파된 바이너리가 저장되고 글로벌 영엑에는 프로그램 안에서 지정된 전역 변수가 저장된다.
+           힙 영역에서는 malloc으로 할당된 메모리의 데이터가 저장되고 스택 영역에서는 프로그램 내의 함수와 관련된 것들이 저장된다.
+           힙 영역에서 위->아래로 스택 영역에서 아래->위로 데이터가 늘어나다보면 기존의 값을 침범하는 상황이 발생할 수도 있는데 이를 힙 오버플로우 혹은 스택 오버플로우라고 하고 이는 모두 버퍼 오버플로우에 속한다.
+
+           get 함수에 대해
+           get_int 함수를 코드로 표현하면 다음과 같다.
+           #include <stdio.h>
+           int main(void)
+           {
+              int x;
+              printf("x: ");
+              scanf("%i", &x);
+              printf("x: %i\n", x);
+           }
+           get_string 함수를 코드로 표현하면 다음과 같다.
+           #include <stdio.h>
+           int main(void)
+           {
+              char s[5];
+              printf("s: ");
+              scanf("%s", s);
+              printf("s: %s\n", s);
+           }
+           scanf는 사용자로부터 형식 지정자에 해당되는 값을 입력받아 저장하는 함수인데 이때 직접 x, s의 지정된 주소에 찾아가서 값을 지정하기 때문에 코드를 작성할 때 &를 추가해주어야 한다.
+           get_string 코드에는 &s가 아닌 s인데 이는 이미 앞에서 s가 char 자료형의 배열로 정의하였고 이전에 배웠다시피 s = &s[0]이기 때문에 따로 &를 추가해주지 않은 것이다.\
+
+           파일 쓰기에 대해
+           #include <stdio.h>
+           #include <cs50.h>
+           #include <string.h>
+           int main(void)
+           {
+              File *file = fopen("phonebook.csv", "a");
+              char *name = get_string("Name: ");
+              char *number = get_string("Number: ");
+              fprintf(file, "%s,%s\n", name, number);
+              fclose(file);
+           }
+           위 코드에서 File은 하드디스크에 있는 파일을 제어하기 위한 자료형이고 File *은 File 포인터 자료형이다.
+           fopen 함수는 파일을 열어달라고 요청하는 함수이다. 이 함수는 파일이름과 모드를 입력받는고 파일 주소를 뱉어낸다. (a는 덧붙이기고 쓰기인 w는 초기화시킨 후 쓰는 것이고 읽기인 r은 읽기 위한 모드라서 수정이 불가능하다.)
+           fprintf는 파일 안에다가 적도록 요청하는 함수이고 파일 주소와 쓸 내용을 입력받고 fclose는 파일을 닫는 함수이고 마찬가지로 파일 주소를 입력받는다.
+
+           파일 읽기에 대해
+           파일의 내용을 읽고 파일의 형식이 JPEG인지 검사하는 코드는 다음과 같다.
+           #include <stdio.h>
+           int main(int argc, char *argv[])
+           {
+              if (argc != 2)
+              {
+                 return 1;
+              }
+              FILE *file = fopen(argv[1], "r");
+              if (file == NULL)
+              {
+                 return 1;
+              }
+              unsigned char bytes[3];
+              fread(bytes, 3, 1, file);
+              if (bytes[0] == 0xff && bytes[1] == 0xd8 && bytes[2] ==0xff)
+              {
+                 printf("Maybe\n");
+              }
+              Else
+              {
+                 printf("No\n");
+              }
+              fclose(file);
+           }
+           이전에 배웠다시피 argc는 argument count로 입력된 단어의 개수를 뜻하고 argv는 argument vector로 배열을 뜻한다. Terminal에 입력하는 순서대로(띄어쓰기 단위로) argv[0], argv[1]... 임을 배웠다.
+           위 코드는 Terminal에 두 단어(./(코드가 작성된 파일 이름) (확인하고자 하는 파일 이름))을 입력했다면 다음 단계로 넘어가고 아니라면 종료한다.
+           다음 단계에서는 확인하고자 하는 파일 이름을 읽기모드로 열어놓고 만약 파일이 제대로 열리지 않는다면 프로그램을 종료한다.
+           다음 단계에서는 크기가 3인 문자 배열을 만들고 fread를 통해 열어놓은 파일에서 첫 3바이트를 읽어온다. (fread함수는 배열, 읽을 바이트 수, 읽을 횟수, 읽을 파일을 입력받는다.)
+           다음 단계에서 각 바이트를 확인하고 일치하면 Maybe, 아니라면 No를 출력한 후 파일을 닫는다.
+   
+## 25.02.28(Sat)-Day 19
+-Lecture : 6. Memory
+           1) Malloc and pointer(review), 2) Adjustment of array size
 -Content : 
-           
-          
+
+## 25.03.01(Sun)-Day 20
+-Lecture : 6. Memory
+           3) Connect list : introduction, 4) Connect list :, 5) Connect list : , 6) Connect list :
+-Content : 
+
+## 25.03.02(Mon)-Day 21
+-Lecture : 6. Memory
+           7) , 8) , 9)
+-Content : 
+
+
+
+
+
+
+
+
+
+
+
+
